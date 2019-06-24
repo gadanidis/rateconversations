@@ -6,6 +6,21 @@ var my_id = jsPsych.randomization.randomID(15);
 var my_age;
 var my_gender;
 var my_ethnicity;
+var my_condition;
+
+// Set condition
+var set_condition = {
+    type: 'survey-multi-choice',
+    questions: [{
+        prompt: "Select the condition",
+        options: ["1", "2", "3"]}],
+        on_finish: function(data){
+            var responses = JSON.parse(data.responses);
+            var condition = responses.Q0;
+            my_condition = condition;
+        }
+};
+timeline.push(set_condition);
 
 // Intro page
 var welcome = {
@@ -82,21 +97,21 @@ var likert_page = {
     );
     },
     questions: [
-        {prompt: "" , labels: scale_fem   , required: false} ,
-        {prompt: "" , labels: scale_masc  , required: false} ,
-        {prompt: "" , labels: scale_young , required: false} ,
-        {prompt: "" , labels: scale_queer , required: false} ,
-        {prompt: "" , labels: scale_can   , required: false} ,
-        {prompt: "" , labels: scale_int   , required: false} ,
-        {prompt: "" , labels: scale_hes   , required: false} ,
-        {prompt: "" , labels: scale_pol   , required: false} ,
-        {prompt: "" , labels: scale_cas   , required: false} ,
-        {prompt: "" , labels: scale_fri   , required: false} ,
+        {prompt: "" , labels: scale_fem   , required: true} ,
+        {prompt: "" , labels: scale_masc  , required: true} ,
+        {prompt: "" , labels: scale_young , required: true} ,
+        {prompt: "" , labels: scale_queer , required: true} ,
+        {prompt: "" , labels: scale_can   , required: true} ,
+        {prompt: "" , labels: scale_int   , required: true} ,
+        {prompt: "" , labels: scale_hes   , required: true} ,
+        {prompt: "" , labels: scale_pol   , required: true} ,
+        {prompt: "" , labels: scale_cas   , required: true} ,
+        {prompt: "" , labels: scale_fri   , required: true} ,
     ],
     data: {
         type: 'quant-results',
         stim: jsPsych.timelineVariable('stim'),
-        condition: jsPsych.timelineVariable('condition'),
+        variant: jsPsych.timelineVariable('variant'),
     },
 };
 
@@ -117,17 +132,35 @@ var text_page = {
     data: {
         type: 'qual-results',
         stim: jsPsych.timelineVariable('stim'),
-        condition: jsPsych.timelineVariable('condition'),
+        variant: jsPsych.timelineVariable('variant'),
     },
 };
 
-var test_procedure = {
-    timeline: [likert_page, text_page],
-    timeline_variables: [
-        { audio: 'stop.mp3', stim: '1', condition: 'um'},
-    ],
-    randomize_order: true
-};
+if (my_condition == '1') {
+    var test_procedure = {
+        timeline: [likert_page, text_page],
+        timeline_variables: [
+            { audio: 'stop.mp3', stim: '1', variant: 'um'},
+        ],
+        randomize_order: true
+    };
+} else if (my_condition == '2') {
+    var test_procedure = {
+        timeline: [likert_page, text_page],
+        timeline_variables: [
+            { audio: 'stop.mp3', stim: '2', variant: 'um'},
+        ],
+        randomize_order: true
+    };
+} else {
+    var test_procedure = {
+        timeline: [likert_page, text_page],
+        timeline_variables: [
+            { audio: 'stop.mp3', stim: '3', variant: 'um'},
+        ],
+        randomize_order: true
+    };
+}
 timeline.push(test_procedure);
 
 var prebrief = {
