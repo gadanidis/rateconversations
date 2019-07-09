@@ -6,21 +6,18 @@ var my_id = jsPsych.randomization.randomID(15);
 var my_age;
 var my_gender;
 var my_ethnicity;
-var my_condition;
 
-// Set condition
-var set_condition = {
-    type: 'survey-multi-choice',
-    questions: [{
-        prompt: "Select the condition",
-        options: ["1", "2", "3"]}],
-        on_finish: function(data){
-            var responses = JSON.parse(data.responses);
-            var condition = responses.Q0;
-            my_condition = condition;
-        }
-};
-timeline.push(set_condition);
+// condition from URL variable
+var condition = jsPsych.data.getURLVariable('condition')
+jsPsych.data.addProperties({condition: condition});
+
+if (condition == "1") {
+    my_folder = "condition1_uhumno";
+} else if (condition == "2") {
+    my_folder = "condition2_nouhum";
+} else {
+    my_folder = "condition3_umnouh";
+}
 
 // Intro page
 var welcome = {
@@ -136,31 +133,28 @@ var text_page = {
     },
 };
 
-if (my_condition == '1') {
-    var test_procedure = {
-        timeline: [likert_page, text_page],
-        timeline_variables: [
-            { audio: 'stop.mp3', stim: '1', variant: 'um'},
-        ],
-        randomize_order: true
-    };
-} else if (my_condition == '2') {
-    var test_procedure = {
-        timeline: [likert_page, text_page],
-        timeline_variables: [
-            { audio: 'stop.mp3', stim: '2', variant: 'um'},
-        ],
-        randomize_order: true
-    };
-} else {
-    var test_procedure = {
-        timeline: [likert_page, text_page],
-        timeline_variables: [
-            { audio: 'stop.mp3', stim: '3', variant: 'um'},
-        ],
-        randomize_order: true
-    };
-}
+var test_procedure = {
+    timeline: [likert_page, text_page],
+    timeline_variables: [
+        { audio: 'sound/' + my_folder + '/01.wav', stim: '1', order: 'second', variant: 'um'},
+        { audio: 'sound/' + my_folder + '/02.wav', stim: '2', order: 'second', variant: 'uh'},
+        { audio: 'sound/' + my_folder + '/03.wav', stim: '3', order: 'second', variant: 'uh'},
+        { audio: 'sound/' + my_folder + '/04.wav', stim: '4', order: 'second', variant: 'uh'},
+        { audio: 'sound/' + my_folder + '/05.wav', stim: '5', order: 'second', variant: 'uh'},
+        { audio: 'sound/' + my_folder + '/06.wav', stim: '6', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/07.wav', stim: '7', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/08.wav', stim: '8', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/09.wav', stim: '9', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/10.wav', stim: '10', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/11.wav', stim: '11', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/12.wav', stim: '12', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/13.wav', stim: '13', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/14.wav', stim: '14', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/15.wav', stim: '15', order: 'second', variant: 'uh'},
+        { audio: 'sound/filler/16.wav', stim: '16', order: 'second', variant: 'uh'},
+    ],
+    randomize_order: true
+};
 timeline.push(test_procedure);
 
 var prebrief = {
