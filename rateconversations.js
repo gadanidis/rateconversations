@@ -73,9 +73,11 @@ var instructions = {
     it.</p>
 
     <p>Your task will be to decide what you think about one of the participants
-    in the conversation: the first person to speak. You'll first be asked to
-    rate them on different scales, and then on the next page you will be able to
-    type in any other comments you have.</p>
+    in the conversation. You'll first be asked to rate them on different scales,
+    and then on the next page you will be able to type in any other comments you
+    have.</p>
+
+    <p> Treat each recording as a separate conversation; your ratings should only take into consideration what you hear in the current recording. </p>
 
     <p>Try to answer the questions at a quick pace, using your gut feeling,
     without trying to think too hard about them for too long. </p>
@@ -90,7 +92,9 @@ var likert_page = {
         '<p><audio controls><source src="' +
         jsPsych.timelineVariable('audio', true) +
         '"</source></audio></p>' +
-        '<p><em>The person who spoke first sounds...</em></p>'
+        '<p><em>The person who spoke ' +
+        jsPsych.timelineVariable('order', true) +
+        ' sounds...</em></p>'
     );
     },
     questions: [
@@ -108,7 +112,6 @@ var likert_page = {
     data: {
         type: 'quant-results',
         stim: jsPsych.timelineVariable('stim'),
-        variant: jsPsych.timelineVariable('variant'),
     },
 };
 
@@ -129,29 +132,28 @@ var text_page = {
     data: {
         type: 'qual-results',
         stim: jsPsych.timelineVariable('stim'),
-        variant: jsPsych.timelineVariable('variant'),
     },
 };
 
 var test_procedure = {
     timeline: [likert_page, text_page],
     timeline_variables: [
-        { audio: 'sound/' + my_folder + '/01.wav', stim: '1', order: 'second', variant: 'um'},
-        { audio: 'sound/' + my_folder + '/02.wav', stim: '2', order: 'second', variant: 'uh'},
-        { audio: 'sound/' + my_folder + '/03.wav', stim: '3', order: 'second', variant: 'uh'},
-        { audio: 'sound/' + my_folder + '/04.wav', stim: '4', order: 'second', variant: 'uh'},
-        { audio: 'sound/' + my_folder + '/05.wav', stim: '5', order: 'second', variant: 'uh'},
-        { audio: 'sound/' + my_folder + '/06.wav', stim: '6', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/07.wav', stim: '7', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/08.wav', stim: '8', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/09.wav', stim: '9', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/10.wav', stim: '10', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/11.wav', stim: '11', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/12.wav', stim: '12', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/13.wav', stim: '13', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/14.wav', stim: '14', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/15.wav', stim: '15', order: 'second', variant: 'uh'},
-        { audio: 'sound/filler/16.wav', stim: '16', order: 'second', variant: 'uh'},
+        { audio: 'sound/' + my_folder + '/01.wav', stim: '1', order: 'second'},
+        { audio: 'sound/' + my_folder + '/02.wav', stim: '2', order: 'second'},
+        { audio: 'sound/' + my_folder + '/03.wav', stim: '3', order: 'first'},
+        { audio: 'sound/' + my_folder + '/04.wav', stim: '4', order: 'second'},
+        { audio: 'sound/' + my_folder + '/05.wav', stim: '5', order: 'first'},
+        { audio: 'sound/' + my_folder + '/06.wav', stim: '6', order: 'first'},
+        { audio: 'sound/filler/07.wav', stim: '7', order: 'second'},
+        { audio: 'sound/filler/08.wav', stim: '8', order: 'first'},
+        { audio: 'sound/filler/09.wav', stim: '9', order: 'first'},
+        { audio: 'sound/filler/10.wav', stim: '10', order: 'second'},
+        { audio: 'sound/filler/11.wav', stim: '11', order: 'first'},
+        { audio: 'sound/filler/12.wav', stim: '12', order: 'first'},
+        { audio: 'sound/filler/13.wav', stim: '13', order: 'first'},
+        { audio: 'sound/filler/14.wav', stim: '14', order: 'first'},
+        { audio: 'sound/filler/15.wav', stim: '15', order: 'first'},
+        { audio: 'sound/filler/16.wav', stim: '16', order: 'first'},
     ],
     randomize_order: true
 };
