@@ -2,7 +2,7 @@
 
 var timeline = [];
 
-var my_id = jsPsych.randomization.randomID(15);
+var my_id = jsPsych.randomization.randomID(8);
 var my_age;
 var my_gender;
 var my_ethnicity;
@@ -68,16 +68,16 @@ var instructions = {
     type: "html-keyboard-response",
     stimulus: `<p>In this study, you will listen to some recordings.</p>
 
-    <p>These recordings are taken from the middle of a conversation which is
-    still ongoing: what you hear is not the full conversation, only a part of
-    it.</p>
+    <p>These recordings are taken from the middle of a conversation: what you
+    hear is not the full conversation, only a part of it.</p>
 
     <p>Your task will be to decide what you think about one of the participants
     in the conversation. You'll first be asked to rate them on different scales,
     and then on the next page you will be able to type in any other comments you
     have.</p>
 
-    <p> Treat each recording as a separate conversation; your ratings should only take into consideration what you hear in the current recording. </p>
+    <p> Treat each recording as a separate conversation; your ratings should
+    only take into consideration what you hear in the current recording. </p>
 
     <p>Try to answer the questions at a quick pace, using your gut feeling,
     without trying to think too hard about them for too long. </p>
@@ -117,12 +117,6 @@ var likert_page = {
 
 var text_page = {
     type: 'survey-text',
-    preamble: function(){return ('<p><em>If you want, listen again.</em></p>' +
-        '<p><audio controls><source src="' +
-        jsPsych.timelineVariable('audio', true) +
-        '"</source></audio></p>'
-        );
-    },
     questions: [
         {prompt: `Is there anything else you want to say about the conversation
         you just listened to? You can enter as much or as little text as you
@@ -195,6 +189,8 @@ var postbrief = {
     preamble: '<p><strong> Please answer these final questions about the experiment.</p></strong>',
     questions: [
         {prompt: "Were you surprised to learn that the experiment was about uh and um? Why or why not?", required: true},
+        {prompt: "What do you think it means when someone uses uh or um?", required: true},
+        {prompt: "Do you think um and uh have different meanings? If so, how are they different?", required: true},
         {prompt: "Do you have any final comments about your experience participating in this experiment?", required: false},
     ],
     data: {
@@ -217,4 +213,3 @@ jsPsych.init({
         jsPsych.data.displayData();
     }
 });
-
