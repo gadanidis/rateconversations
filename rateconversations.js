@@ -24,16 +24,16 @@ if (condition === "1") {
 }
 
 if (voice === "r") {
-    voice_folder = "voice_r"
+    voice_folder = "voice_r";
 } else {
-    voice_folder = "voice_p"
+    voice_folder = "voice_p";
 }
 
 // Intro page
 var welcome = {
     type: 'html-keyboard-response',
     stimulus: 'Welcome to the experiment. Press any key to begin.'
-}
+};
 timeline.push(welcome)
 
 // Ask the participant for demo info and save it to data
