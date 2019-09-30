@@ -9,6 +9,44 @@ var my_ethnicity;
 var condition_folder;
 var voice_folder;
 
+var select_order;
+
+var p_order = [ "second"
+              , "second"
+              , "first"
+              , "second"
+              , "first"
+              , "first"
+              , "second"
+              , "second"
+              , "second"
+              , "first"
+              , "first"
+              , "first"
+              , "first"
+              , "second"
+              , "first"
+              , "first"
+              ];
+
+var r_order = [ "second"
+              , "second"
+              , "first"
+              , "second"
+              , "first"
+              , "first"
+              , "second"
+              , "first"
+              , "first"
+              , "second"
+              , "first"
+              , "first"
+              , "first"
+              , "first"
+              , "first"
+              , "first"
+              ];
+
 // condition from URL variable
 var condition = jsPsych.data.getURLVariable('condition')
 var voice     = jsPsych.data.getURLVariable('voice')
@@ -25,8 +63,10 @@ if (condition === "1") {
 
 if (voice === "r") {
     voice_folder = "voice_r";
+    select_order = r_order;
 } else {
     voice_folder = "voice_p";
+    select_order = p_order;
 }
 
 // Intro page
@@ -142,22 +182,22 @@ var text_page = {
 var test_procedure = {
     timeline: [likert_page, text_page],
     timeline_variables: [
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/01.wav', stim: '1', order: 'second'},
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/02.wav', stim: '2', order: 'second'},
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/03.wav', stim: '3', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/04.wav', stim: '4', order: 'second'},
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/05.wav', stim: '5', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/06.wav', stim: '6', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/07.wav', stim: '7', order: 'second'},
-        { audio: 'sound/' + voice_folder + '/filler/08.wav', stim: '8', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/09.wav', stim: '9', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/10.wav', stim: '10', order: 'second'},
-        { audio: 'sound/' + voice_folder + '/filler/11.wav', stim: '11', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/12.wav', stim: '12', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/13.wav', stim: '13', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/14.wav', stim: '14', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/15.wav', stim: '15', order: 'first'},
-        { audio: 'sound/' + voice_folder + '/filler/16.wav', stim: '16', order: 'first'},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/01.wav', stim: '1', order: select_order[0]},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/02.wav', stim: '2', order: select_order[1]},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/03.wav', stim: '3', order: select_order[2]},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/04.wav', stim: '4', order: select_order[3]},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/05.wav', stim: '5', order: select_order[4]},
+        { audio: 'sound/' + voice_folder + '/' + condition_folder + '/06.wav', stim: '6', order: select_order[5]},
+        { audio: 'sound/' + voice_folder + '/filler/07.wav', stim: '7', order: select_order[6]},
+        { audio: 'sound/' + voice_folder + '/filler/08.wav', stim: '8', order: select_order[7]},
+        { audio: 'sound/' + voice_folder + '/filler/09.wav', stim: '9', order: select_order[8]},
+        { audio: 'sound/' + voice_folder + '/filler/10.wav', stim: '10', order: select_order[9]},
+        { audio: 'sound/' + voice_folder + '/filler/11.wav', stim: '11', order: select_order[10]},
+        { audio: 'sound/' + voice_folder + '/filler/12.wav', stim: '12', order: select_order[11]},
+        { audio: 'sound/' + voice_folder + '/filler/13.wav', stim: '13', order: select_order[12]},
+        { audio: 'sound/' + voice_folder + '/filler/14.wav', stim: '14', order: select_order[13]},
+        { audio: 'sound/' + voice_folder + '/filler/15.wav', stim: '15', order: select_order[14]},
+        { audio: 'sound/' + voice_folder + '/filler/16.wav', stim: '16', order: select_order[15]},
     ],
     randomize_order: true
 };
